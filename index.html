@@ -285,7 +285,7 @@ function toEEST(utcStr) {
 }
 
 async function apiFetch(path) {
-  const res = await fetch(`/.netlify/functions/api?path=${encodeURIComponent(path)}`);
+  const res = await fetch(`/.netlify/functions/api${path}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
