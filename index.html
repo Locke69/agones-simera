@@ -455,7 +455,7 @@ async function init() {
 
   try {
     const fixtures = await fetchFixtures(date);
-    const relevant = fixtures.filter(f => LEAGUES[f.league.id]);
+    const relevant = fixtures;
 
     if (!relevant.length) {
       document.getElementById("main").innerHTML = `<div class="empty-state">Δεν βρέθηκαν αγώνες για σήμερα στα επιλεγμένα πρωταθλήματα.</div>`;
