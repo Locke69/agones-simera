@@ -3,7 +3,7 @@ exports.handler = async (event) => {
   const API_HOST = "v3.football.api-sports.io";
 
   const path = event.queryStringParameters?.path;
-  if (!path) return { statusCode: 400, body: "Missing path" };
+  if (!path) return { statusCode: 400, body: JSON.stringify({ error: "Missing path" }) };
 
   const url = `https://${API_HOST}${path}`;
 
@@ -13,18 +13,25 @@ exports.handler = async (event) => {
         "x-apisports-key": API_KEY
       }
     });
-    const data = await res.text();
+
+    const text = await res.text();
+
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
       },
-      body: data
+      body: JSON.stringify({
+        status: res.status,
+        ok: res.ok,
+        raw: text.slice(0, 500)
+      })
     };
   } catch (err) {
     return {
       statusCode: 500,
+      headers: { "Access-Control-Allow-Origin": "*" },
       body: JSON.stringify({ error: err.message })
     };
   }
