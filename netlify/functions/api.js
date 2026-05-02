@@ -12,7 +12,7 @@ exports.handler = async (event) => {
 
   delete params.endpoint;
   const qs = new URLSearchParams(params).toString();
-  const url = `https://${API_HOST}/v3/${endpoint}${qs ? "?" + qs : ""}`;
+  const url = `https://${API_HOST}/${endpoint}${qs ? "?" + qs : ""}`;
 
   try {
     const res = await fetch(url, {
