@@ -1,5 +1,5 @@
 exports.handler = async (event) => {
-  const koula = process.env.koula;
+  const API_KEY = process.env.API_KEY;
   const API_HOST = "v3.football.api-sports.io";
 
   const path = event.queryStringParameters?.path;
@@ -10,7 +10,7 @@ exports.handler = async (event) => {
   try {
     const res = await fetch(url, {
       headers: {
-        "x-apisports-key": koula
+        "x-apisports-key": API_KEY
       }
     });
     const data = await res.text();
