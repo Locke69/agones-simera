@@ -1,6 +1,6 @@
 exports.handler = async (event) => {
-  const API_KEY = "5a461ea9d5977e661177d550e671c60f";
-  const API_HOST = "api-football-v1.p.rapidapi.com";
+  const API_KEY = process.env.API_KEY;
+  const API_HOST = "v3.football.api-sports.io";
 
   const path = event.queryStringParameters?.path;
   if (!path) return { statusCode: 400, body: "Missing path" };
@@ -10,8 +10,7 @@ exports.handler = async (event) => {
   try {
     const res = await fetch(url, {
       headers: {
-        "X-RapidAPI-Key": API_KEY,
-        "X-RapidAPI-Host": API_HOST
+        "x-apisports-key": API_KEY
       }
     });
     const data = await res.text();
